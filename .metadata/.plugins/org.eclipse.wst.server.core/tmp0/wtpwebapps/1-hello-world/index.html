@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>Hello World!</h1>
+	<ul>
+		<li><a href="UserServlet">UserServlet</a></li>
+		<!-- 화면에 표시되고 있는 정보를 http://localhost:8080/1-hello-world/
+			 주소로 받은 경우, 다른 링크는 해당 URL 문자열을 생략할 수 있다.
+		-->
+		<li><a href="users?number=777">users</a></li>
+		<li><a href="ShowMeTheMoney">URL 패턴이 일치하는 정보가 없는 경우</a></li>
+	</ul>
+	<!--id는 css js 때 쓰이고 브라우저에 의해 값을 전송할 때 쓰이는 key는 name속성이다.  -->
+	<form action="users" method="post">
+		<input type="text" id="number" name="number" value="486">
+		<button type="submit">Send</button>
+	</form>
+</body>
+</html>

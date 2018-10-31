@@ -1,0 +1,58 @@
+package com.google.ace;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/cookie")
+public class CookieServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	private static int count = 0;
+	protected void doGet(
+			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		count++;
+		Cookie counterCookie = new Cookie("OJC"+count, String.valueOf(count));
+	
+	//쿠키에 대한 설명 추가
+	counterCookie.setComment("OJC Cookie Counter"+count);
+	// 하루짜리 쿠키
+	counterCookie.setMaxAge(24 * 60 * 60);
+	// 쿠키를 굽는다.
+	response.addCookie(counterCookie);
+	
+	String path = "/WEB-INF/cookie-test.jsp";
+	
+	// 서블릿 클래스에서 JSP에게 데이터를 전달하는 방법이다.
+	request.setAttribute("count", count);
+	
+	RequestDispatcher rd = request.getRequestDispatcher(path);
+	// forward: 서블릿 클래스에서 JSP로 연동하는 방법이다.
+	// JSP로 연동하여 JSP의 화면정보를 응답 문자열로 사용하는 방법이다.
+	
+	// 객체는 참조이다. 서블릿이 사용하던 request, response 객체를
+	// JSP에게 전달하면 	결국 서블릿이 사용하던 같은 객체를 
+	// JSP가 사용하게 된다.
+		rd.forward(request, response);
+		
+		
+	}
+
+	protected void doPost(
+			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}

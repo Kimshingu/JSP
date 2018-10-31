@@ -1,0 +1,16 @@
+out.write("<br>");
+}
+}
+count++;
+Cookie counterCookie = new Cookie("OJC"+count, String.valueOf(count));
+//쿠키에 대핚 설명 추가
+counterCookie.setComment("OJC Cookie Counter"+count);
+// 하루짜리 쿠키
+counterCookie.setMaxAge(24 * 60 * 60);
+// 아래 주소로 다시 들어올때 쿠키를 가지고 온다.
+counterCookie.setPath("/ojcweb/CookieTest");
+// 쿠키를 굽는다.
+response.addCookie(counterCookie);
+out.write("Cookie Write OK..." + count);
+out.write("</body></html>");
+}
